@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Demo Website</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .web-header {
+        margin-top: -20px;
+        height: 80px;
+        background: #25363e;
+
+      }
+      .web-header img {
+        margin-top: 20px;
+        margin-left: 20px;
+        display: inline-block;
+      }
+      .wizard-title {
+        color: white;
+        font-size: 30px;
+        font-family: 'PoppinsGF-Regular', sans-serif;
+        font-weight: 500;
+        display: inline-block;
+        margin-left: 34%;
+      }
+      .spinner {
+        text-align: center;
+        margin-top: 115px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        color: #07a8a8;
+        font-family: 'PoppinsGF-Regular', sans-serif;
+      }
+      #wwWidget {
+        width: 100%;
+        display: block;
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+      }
+    </style>
+  </head>
+  ​
+  <body>
+    <div class="web-header">
+      <img src="logo_siie_blanco.png">
+      <h1 class="wizard-title"></h1>
+    </div>
+    <div class="spinner">
+      Cargando Wizard. Espere, por favor....
+    </div>
+    <div id="wwWidget"></div>
+    
+    <script type="text/javascript" src="../lib/index.js"></script>
+    <script type="text/javascript">
+      (function() {
+        var params = {
+          accessToken:
+            "HlbF7H0Y9Tre2zkJCBBUz4KAA97qmt7lBbBc1jdzZ867E29C2wF7ALZMQhixZVYX",
+          wizardCode: "OFICINA_TECNICA",
+          environment: "test",
+          backgroundStyles: {
+            //background: '#ffffff'
+            backgroundImage: "http://sii-e.com/images/home/header-01.jpg"
+          },
+          //clientApplication: {
+          //  address: 'Balmes',
+          //  addressNumber: '188',
+          //  documentNumber: 'H38822870',
+          //  door: '1',
+          //  email: 'john.doe@wattwin.com',
+          //  floor: '6',
+          //  phoneNumber: '654321654',
+          //  postalCode: '08006',
+          //  province: 'Barcelona',
+          //  town: 'Barcelona',
+          //  name: 'ACME'
+          //}
+          //locatorCode: 'K17NUF01'
+        };
+
+        const widget = new Wattwin.WizardWidget(params);
+
+        // Initialize the widget giving the HTML Div where to place the Wattwin widget content
+        widget.initWidget("wwWidget");
+
+        window.addEventListener("widget.error", event => {
+          console.log("WIDGET ERROR: ", event);
+        });
+
+        // Listen when the wattwin wizard is loaded and ready
+        window.addEventListener("wizard.ready", event => {
+          console.log("WIZARD READY: ", event);
+
+          // Setups the wizard name in the title element
+          document.getElementById("wwWidget").style.display = "block";
+          document.getElementsByClassName("spinner")[0].style.display = "none";
+          document.getElementsByClassName("wizard-title")[0].innerHTML =
+            event.detail.name;
+        });
+
+        // Listen when the complete widget form has been completed
+        window.addEventListener("wizard.completed", event => {
+          console.log("WIZARD COMPLETED", event);
+        });
+
+        // Listen when the user goes to another step
+        window.addEventListener("wizard.step", event => {
+          console.log("WIZARD STEP GO", event);
+        });
+
+        // Listen when a form step is completed
+        window.addEventListener("save.application", event => {
+          console.log("UPLODADED: ", event);
+        });
+      })();
+    </script>
+  </body>
+  ​
+</html>
