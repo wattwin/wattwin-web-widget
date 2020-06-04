@@ -106,7 +106,7 @@
     <script type="text/javascript" src="../lib/index.js"></script>
     <script type="text/javascript">
       // Initialize the widget params and loads the widget
-      function sEmptyWizard() {
+      function loadEmptyWizard() {
         var params = {
           accessToken:
             "HlbF7H0Y9Tre2zkJCBBUz4KAA97qmt7lBbBc1jdzZ867E29C2wF7ALZMQhixZVYX",
@@ -142,9 +142,9 @@
             province: "Barcelona",
             town: "Barcelona",
             name: "ACME",
-            legalRepresentation: 'ORGANIZATION',
+            legalRepresentation: "ORGANIZATION",
             contactName: "John",
-            contactLastName: "Doe"
+            contactLastName: "Doe",
           },
         };
         loadWizard(params);
@@ -190,5 +190,4 @@
       }
     </script>
   </body>
-  ​
 </html>
